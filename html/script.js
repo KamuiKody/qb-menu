@@ -10,6 +10,7 @@ const openMenu = (data = null) => {
             let isMenuHeader = item.isMenuHeader;
             let isDisabled = item.disabled;
             let icon = item.icon;
+            images[index] = item;
             html += getButtonRender(header, message, index, isMenuHeader, isDisabled, icon);
             if (item.params) buttonParams[index] = item.params;
         }
@@ -39,6 +40,7 @@ const getButtonRender = (header, message = null, id, isMenuHeader, isDisabled, i
 
 const closeMenu = () => {
     $("#buttons").html(" ");
+    $('#imageHover').css('display' , 'none');
     buttonParams = [];
     images = [];
 };
@@ -83,11 +85,11 @@ window.addEventListener('mousemove', (event) => {
         let id = event.target.id;
         if (!images[id]) return
         if (images[id].image) {
-            document.getElementById('image').src = images[id].image;
-            document.getElementById('imageHover').style.display = 'block';
+            $('#image').attr('src', images[id].image);
+            $('#imageHover').css('display' , 'block');
         }
     }
     else {
-        document.getElementById('imageHover').style.display = 'none';
+        $('#imageHover').css('display' , 'none');
     }
 })
